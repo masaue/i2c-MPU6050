@@ -22,6 +22,7 @@ async function main() {
     var rx = document.getElementById("rx");
     var ry = document.getElementById("ry");
     var rz = document.getElementById("rz");
+    var button = document.getElementById("button");
     var i2cAccess = await navigator.requestI2CAccess();
     var port = i2cAccess.ports.get(1);
     var mpu6050 = new MPU6050(port, 0x68);
@@ -36,6 +37,13 @@ async function main() {
       rx.innerHTML = val.rx;
       ry.innerHTML = val.ry;
       rz.innerHTML = val.rz;
+      if (await switchPort.read() === 0) {
+        button.innerHTML =  'pulled';
+	// TODO write to spreadsheet
+      }
+      else {
+        button.innerHTML =  'not pulled';
+      }
       await sleep(1000);
     }
   } catch (error) {
