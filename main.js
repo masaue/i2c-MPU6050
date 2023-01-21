@@ -22,6 +22,7 @@ async function main() {
     var rx = document.getElementById("rx");
     var ry = document.getElementById("ry");
     var rz = document.getElementById("rz");
+    var synthetic = document.getElementById("synthetic");
     var button = document.getElementById("button");
     var i2cAccess = await navigator.requestI2CAccess();
     var port = i2cAccess.ports.get(1);
@@ -37,6 +38,7 @@ async function main() {
       rx.innerHTML = val.rx;
       ry.innerHTML = val.ry;
       rz.innerHTML = val.rz;
+      synthetic.innerHTML = Math.sqrt(val.rx ** 2 + val.ry ** 2 + val.rz ** 2);
       if (await switchPort.read() === 0) {
         button.innerHTML =  'pulled';
 	// TODO write to spreadsheet
