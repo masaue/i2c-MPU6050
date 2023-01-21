@@ -1,5 +1,3 @@
-import fetch from "node-fetch"
-
 main();
 
 async function main() {
@@ -17,6 +15,7 @@ async function main() {
   };
 
   try {
+    const fetch = require('node-fetch');
     var temp = document.getElementById("temp");
     var gx = document.getElementById("gx");
     var gy = document.getElementById("gy");
