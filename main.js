@@ -1,3 +1,5 @@
+import fetch from "node-fetch"
+
 main();
 
 async function main() {
@@ -41,7 +43,29 @@ async function main() {
       synthetic.innerHTML = Math.sqrt(val.rx ** 2 + val.ry ** 2 + val.rz ** 2);
       if (await switchPort.read() === 0) {
         button.innerHTML =  'pulled';
-	// TODO write to spreadsheet
+
+        let data = {
+          "action": "insert",
+          "sheetName": "sheet1",
+          "rows": [
+            {
+              "value1": val.rx,
+              "value2": val.ry,
+              "value3": val.rz, 
+            }
+          ]
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbzFdMMVldXmUfBYcWIzF-dWs5LWtv9g_MJjrW-DbMegM6b4UjUsasGbwTPUOZtGNV3J/exec', {
+          method: 'POST',
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.text())
+        .then(data => { console.log(data) });
       }
       else {
         button.innerHTML =  'not pulled';

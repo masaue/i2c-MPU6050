@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@chirimen-raspi/polyfill": "latest",
     "@chirimen/mpu6050": "latest",
-    "@chirimen-raspi/polyfill": "latest"
+    "node-fetch": "^3.3.0"
   }
 }
